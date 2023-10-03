@@ -1,0 +1,17 @@
+{% load render_share_shop %}
+<div class="latest-product__text">
+    <h4>Sản Phẩm Mới</h4>
+    <div class="latest-product__slider owl-carousel">
+
+        {% for group in items_product_latest %}
+        
+            <div class="latest-prdouct__slider__item">
+
+                {% render_share_shop 'product-item.html' group %}
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+</div>

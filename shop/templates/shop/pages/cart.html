@@ -1,0 +1,85 @@
+{% extends "shop/layout.html" %}
+
+{% load static %}
+{% load format_currenct_vietnam %}
+{% load get_price_old %}
+
+{% block content %}
+<section class="shoping-cart spad">
+    <div class="container">
+        {% if items_product_cart|length > 0 %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Sản Phẩm</th>
+                                    <th>Đơn Giá</th>
+                                    <th>Số Lượng</th>
+                                    <th>Thành Tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for item in items_product_cart %}
+                                    <tr>
+                                        <td class="shoping__cart__item">
+                                            <img src="{{ item.product.image.url }}"
+                                                alt="{{ item.product.name }}" class="img_thumb_cart">
+                                            <h5>{{ item.product.name }}</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            <span class="price_old">{% get_price_old item.product.price item.product.price_sale %}</span>
+                                            <span>{{ item.product.price_real|format_currenct_vietnam }}</span>
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <a href="{% url 'shop:update_cart' %}?productId={{item.product.id}}&action=decrease"
+                                                        class="dec qtybtn">-</a>
+                                                    <input type="text" value="{{ item.quantity }}">
+                                                    <a href="{% url 'shop:update_cart' %}?productId={{item.product.id}}&action=increase"
+                                                        class="inc qtybtn">+</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            {{ item.item_price|format_currenct_vietnam }}
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                            <a href="{% url 'shop:update_cart' %}?productId={{item.product.id}}&action=delete"
+                                                class="icon_close"></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="{% url 'shop:shop' %}" class="primary-btn cart-btn">Tiếp Tục Mua Hàng</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <ul>
+                            <li>Tổng Tiền <span>{{ total_price|format_currenct_vietnam }}</span></li>
+                        </ul>
+                        <a href="{% url 'shop:checkout' %}" class="primary-btn">Tiến Hành Đặt Hàng</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-lg-12 row justify-content-center pt-5 pb-5">
+                <img src="{% static 'shop/assets/img/empty-cart.jpg' %}">
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

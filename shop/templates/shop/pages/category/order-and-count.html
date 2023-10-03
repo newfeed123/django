@@ -1,0 +1,43 @@
+{% load query_to_string %}
+
+<div class="col-lg-4 col-md-5">
+    <div class="filter__sort">
+        <span>Sắp Xếp</span>
+        <select id="sort-product">
+
+            {% comment %} <option 
+                value="?order=-price&{% query_to_string params %}" 
+                {% if params.order == '-price' %}
+                    selected
+                {% endif %}
+            > {% endcomment %}
+            <option 
+                value="?{% query_to_string params "order" "-price"%}" 
+                {% comment %} {% if params.order == '-price' %}
+                    selected
+                {% endif %} {% endcomment %}
+                data-active="-price"
+            >
+                GIÁ GIẢM DẦN
+            </option>
+
+            <option 
+                value="?{% query_to_string params "order" "price"%}"
+                {% comment %} {% if params.order == 'price' %}
+                    selected
+                {% endif %} {% endcomment %}
+                data-active="price"
+            >
+                GIÁ TĂNG DẦN
+            </option>
+            
+        </select>
+    </div>
+</div>
+
+{% comment %} số lượng sản phẩm {% endcomment %}
+<div class="col-lg-4 col-md-4">
+    <div class="filter__found text-right">
+        <h6><span>{{product_count}}</span> Sản Phẩm</h6>
+    </div>
+</div>

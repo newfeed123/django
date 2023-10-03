@@ -1,0 +1,93 @@
+{% extends "layout-sidebar.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="whats-news-wrapper">
+    <!-- Heading & Nav Button -->
+    <div class="row justify-content-between align-items-end mb-15">
+        <div class="col-xl-4">
+            <div class="section-tittle mb-30 ml-2">
+                <h3>{{ item_category.name }}</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Tab content -->
+    <div class="row">
+        <div class="col-12">
+            <!-- Nav Card -->
+            <div class="tab-content" id="nav-tabContent">
+                <!-- card one -->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                    aria-labelledby="nav-home-tab">
+                    <div class="row">
+
+                        {% if items_article|length > 0 %}
+                            {% if item_category.layout == 'list' %}
+                                {% include 'pages/category/list.html' %}
+                            {% else %}
+                                {% include 'pages/category/grid.html' %}
+                            {% endif %} 
+                        {% else %}
+                            <p class="col-xl-6 col-lg-12">Chưa có bài viết.</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Nav Card -->
+        </div>
+    </div>
+</div>
+
+{% if paginator.num_pages >= 2 %}
+<!--Start pagination -->
+<div class="pagination-area  gray-bg pb-45 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="single-wrap">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+
+                            {% if items_article.has_previous%}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{items_article.prevous_page_number}}">
+                                        <i class="fas fa-arrow-left text-primary"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for page in paginator.page_range %}
+
+                                {% if page == items_article.number %}
+                                    <li class="page-item active">
+                                        <a class="page-link">{{page}}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{page}}">{{page}}</a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+                            
+                            {% if items_article.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{items_article.next_page_number}}">
+                                        <i class="fas fa-arrow-right text-primary"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End pagination  -->
+{% endif %}
+
+{% endblock %}

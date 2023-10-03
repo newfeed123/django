@@ -1,0 +1,5 @@
+{% load format_currenct_vietnam %}
+<ul>
+    <li><a href="/gio-hang.html"><i class="fa fa-shopping-bag"></i> <span>{{item_cart_info.quantity_cart}}</span></a></li>
+</ul>
+<div class="header__cart__price">Tiền Hàng: <span>{{item_cart_info.total_cart|format_currenct_vietnam}}</span></div>

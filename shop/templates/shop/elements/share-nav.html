@@ -1,0 +1,6 @@
+<ul class="main-nav">
+    <li><a href="{% url 'shop:index' %}">Trang Chủ</a></li>
+    <li data-active="{{item_category.slug}}"><a href="{% url 'shop:shop' %}">Cửa Hàng</a></li>
+    <li><a href="{% url 'shop:contact' %}">Liên Hệ</a></li>
+    <li><a href="{% url 'shop:check_order' %}">Đơn Hàng</a></li>
+</ul>

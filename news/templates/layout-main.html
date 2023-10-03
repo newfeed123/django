@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    {% include 'elements/head.html' %}
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="news/assets/img/logo/logo_zendvn.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        {% include "elements/header.html" %}
+    </header>
+    <main>
+
+        {% block main_content %}
+        {% endblock %}
+
+    </main>
+    <footer>
+        {% include "elements/footer.html" %}
+    </footer>
+    
+    <!-- Search model Begin -->
+    {% include "elements/search.html" %}
+    <!-- Search model end -->
+
+    <!-- JS here -->
+
+    {% include 'elements/scripts.html' %}
+
+</body>
+
+</html>

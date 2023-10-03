@@ -1,0 +1,66 @@
+{%extends "layout-post.html"%}
+
+{% load static %}
+
+{% block content %}
+
+<div class="single-post">
+    <div class="feature-img">
+        <img class="img-fluid" src="{{item_article.image.url}}" alt="" style="min-width: 100%;">
+    </div>
+    <div class="blog_details">
+        <h2>{{item_article.name}}</h2>
+        <ul class="blog-info-link mt-3 mb-4">
+            <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i> {{item_article.published_date|date:'M d, Y'}}</a></li>
+        </ul>
+        {{item_article.content|safe}}
+    </div>
+</div>
+<div class="navigation-top">
+    <div class="d-sm-flex justify-content-between text-center">
+        <div class="col-sm-4 text-center my-2 my-sm-0">
+            <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+        </div>
+        <ul class="social-icons">
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="related-posts">
+        <h3 class="related-posts-title">Bài Viết Liên Quan</h3>
+        <div class="d-flex flex-wrap">
+
+            {% for item in items_article_related %}
+                <div class="post-item col-6">
+                    <img src="{{ item.image.url }}" alt="post" style="width: 30%;">
+                    <div class="post-body">
+                        <a href="{{ item.get_absolute_url }}">
+                            <h4>{{item.name}}</h4>
+                        </a>
+                        <p></p>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+<div class="blog-author">
+    <div class="media align-items-center">
+        <img src="{% static 'news/assets/img/article/author.png' %}" alt="">
+        <div class="media-body">
+            <a href="#">
+                <h4>ZendVN</h4>
+            </a>
+            <p>Với các khóa học lập trình Online, Offline, Online 1 kèm 1, ZendVN đảm bảo cung
+                cấp đầy đủ kiến thức cho các bạn học viên để tự tin đi làm</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

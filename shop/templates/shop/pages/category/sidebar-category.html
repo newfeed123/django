@@ -1,0 +1,25 @@
+<h4>Danh Mục</h4>
+<ul class="list-category">
+
+    {% comment %} {% for item in items_category %}
+        <li 
+            {% if item.name == item_category.name %}
+                class="active"
+            {% endif %} 
+        >
+            <a href="{{item.get_absolute_url}}">{{item.name}}</a>
+        </li>
+    {% endfor %} 
+        xử lý active category bên sever
+    {% endcomment %}
+
+    {% comment %} xử lý active category bên client bằng js {% endcomment %}
+    {% for item in items_category %}
+        <li 
+            data-active="{{item.slug}}"
+        >
+            <a href="{{item.get_absolute_url}}">{{item.name}}</a>
+        </li>
+    {% endfor %}
+
+</ul>

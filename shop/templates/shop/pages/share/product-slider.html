@@ -1,0 +1,13 @@
+{% load render_share_shop %}
+
+{% for group in items %}
+    {% if group|length == 3 %}
+        <div class="owl-item" style="width: 330px;">
+            <div class="latest-prdouct__slider__item">
+
+                {% render_share_shop 'product-item.html' group %}
+
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

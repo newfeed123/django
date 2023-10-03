@@ -1,0 +1,44 @@
+<h4>Giá Tiền</h4>
+<div class="price-range-wrap">
+    <div class="range-slider">
+        {% comment %} 
+            action sẽ có 1 link, method là get  
+        {% endcomment %}
+        <form 
+            action="
+                {% if item_category %}
+                    {{ item_category.get_absolute_url }}
+                {% else %}
+                    {% url 'shop:shop' %}
+                {% endif %}
+            "
+            method="get"
+        >
+            <div class="row justify-content-between">
+                <div class="col">
+                    <input type="text" class="form-control" name="minPrice" placeholder="Từ"
+                        value="{{params.minPrice}}"> 
+                        {% comment %} bên template django gọi đến thuộc tính thông qua . {% endcomment %}
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="maxPrice" placeholder="Đến" value="{{params.maxPrice}}">
+                </div>
+            </div>
+            
+            {% if params.order != '-price' %}
+                <input type="hidden" class="form-control" name="order" value="price">
+            {% endif %}
+
+            {% if params.planting %}
+                <input type="hidden" class="form-control" name="planting" value="{{params.planting}}">
+            {% endif %}
+
+            <button type="submit" class="price-filter-btn">Áp Dụng</button>
+            {% comment %} do method là get nên user bấm submit thì chuyển hướng đến 
+                link+thêm các trường trong input: /cay-canh-de-ban.html?minPrice=1000&maxPrice=9999
+                có 2 TH: nếu user đang ở shop.html thì link: /shop.html?minPrice=1000&maxPrice=9999
+                         nếu user đang ở 1 category vd: cay-an-qua nào đó thì link: /cay-an-qua.html?minPrice=1000&maxPrice=9999
+            {% endcomment %}
+        </form>
+    </div>
+</div>
